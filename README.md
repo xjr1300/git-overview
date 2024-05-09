@@ -112,6 +112,14 @@ Gitの主な特徴を次に示します。
   ローカルリポジトリは、開発者が作業を行うためのリポジトリです。
   リモートリポジトリからリポジトリをクローンすることで、ローカルリポジトリを作成できます。
 
+- Ricksoft社のブログから借用した図
+
+![リモートリポジトリとローカルリポジトリ](https://www.ricksoft.jp/blog/assets_c/2022/10/20221025_02-thumb-640xauto-7921.png)
+
+- CLOUD SMITH社のブログから借用した図
+
+![ブランチとコミット履歴](https://cloudsmith.co.jp/blog/.assets/thumbnail/GitFlow-640wri.png)
+
 ## Gitのインストール
 
 [ここ](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)を参照してGitをインストールしてください。
