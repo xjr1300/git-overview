@@ -178,7 +178,7 @@ Gitでは変更内容（ファイル全体やファイルの一部）を次の3�
 ローカルリポジトリにある履歴は、履歴を改変するコマンドを実行しない限り、永遠に保存されます。
 ステージにある変更をローカルリポジトリにコミットする場合は、`commit`コマンドを使用します。
 
-<https://pengi-n.co.jp/blog/github-ja/>から借用した図
+- PENGIN社のブログから借用した図
 
 ![Gitの3つのエリア](https://pengi-n.co.jp/blog/wp-content/uploads/2021/05/github1-1024x233.png)
 
