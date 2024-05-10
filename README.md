@@ -50,6 +50,8 @@
   - [リモートリポジトリ](#リモートリポジトリ)
     - [リモートリポジトリの作成](#リモートリポジトリの作成)
     - [リモートリポジトリとローカルリポジトリの紐付け](#リモートリポジトリとローカルリポジトリの紐付け)
+    - [リモートリポジトリの名前をリスト](#リモートリポジトリの名前をリスト)
+    - [指定したリモートリポジトリの情報を確認](#指定したリモートリポジトリの情報を確認)
     - [リモートリポジトリの内容をフェッチ（取得）](#リモートリポジトリの内容をフェッチ取得)
     - [リモートリポジトリの内容をマージ](#リモートリポジトリの内容をマージ)
     - [リモートリポジトリにローカルリポジトリの内容をプッシュ](#リモートリポジトリにローカルリポジトリの内容をプッシュ)
@@ -1118,6 +1120,43 @@ git remote add <remote name> <remote repo uri>
 
 `remote name`は、リモートリポジトリの名前を指定しますが、通常`origin`が使用されます。
 これ以降、リモートリポジトリの名前は`origin`であることを前提に説明します。
+
+### リモートリポジトリの名前をリスト
+
+リモートリポジトリの名前をリストする場合、次を実行します。
+
+```sh
+git remote show
+```
+
+- 実行例
+
+```sh
+% git remote show
+origin
+```
+
+### 指定したリモートリポジトリの情報を確認
+
+指定したリモートリポジトリの情報を確認する場合、次を実行します。
+
+```sh
+git remote show <remote name>
+```
+
+- 実行例
+
+```sh
+% git remote show origin
+* remote origin
+  Fetch URL: git@github.com:xjr1300/git-overview.git
+  Push  URL: git@github.com:xjr1300/git-overview.git
+  HEAD branch: main
+  Remote branch:
+    main tracked
+  Local ref configured for 'git push':
+    main pushes to main (up to date)
+```
 
 ### リモートリポジトリの内容をフェッチ（取得）
 
