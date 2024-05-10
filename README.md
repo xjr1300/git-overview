@@ -87,6 +87,10 @@
         - [`--mixed`オプションの動作確認](#--mixedオプションの動作確認)
         - [`---soft`オプションの動作確認](#---softオプションの動作確認)
         - [`---hard`オプションの動作確認](#---hardオプションの動作確認)
+  - [How To](#how-to)
+    - [誤って`main`または`develop`ブランチにコミットしてしまった場合](#誤ってmainまたはdevelopブランチにコミットしてしまった場合)
+    - [リモートリポジトリで削除されたブランチをローカルリポジトリから削除する](#リモートリポジトリで削除されたブランチをローカルリポジトリから削除する)
+    - [リポジトリからファイルまたはディレクトリを完全に削除](#リポジトリからファイルまたはディレクトリを完全に削除)
 
 ## Gitとは
 
@@ -2372,3 +2376,77 @@ nothing to commit, working tree clean
 ```
 
 `--hart`の場合、取り消されたコミットの変更、ステージされた変更及びワークツリーの変更は、すべて取り消されます。
+
+## How To
+
+### 誤って`main`または`develop`ブランチにコミットしてしまった場合
+
+- 誤って`main`ブランチにコミットした状態
+
+```text
+A --- B --- C --- D <- main <- HEAD
+```
+
+上記を、次のようにコミット`B`から別ブランチを作成して`C`以降のコミットを作成する場合を説明します。
+
+```text
+A --- B <- main
+         |
+        C --- D <- feature <- HEAD
+```
+
+まずは、`main`ブランチから`feature/a`ブランチを作成します。
+
+```sh
+git checkout -b feature/a
+```
+
+```text
+A --- B --- C --- D <- (HEAD -> feature/a, main)
+```
+
+そして、`main`ブランチに切り替えて、`B`までハードリセットします。
+
+```sh
+git switch main
+git reset --hard B
+```
+
+```text
+A --- B <- main <- HEAD
+         |
+        C --- D <- feature/a
+```
+
+### リモートリポジトリで削除されたブランチをローカルリポジトリから削除する
+
+```sh
+# リモートリポジトリのブランチを確認
+git remote show origin
+# リモートリポジトリからブランチが削除されているが、ローカルリポジトリに残っているブランチを表示
+git remote prune --dry-run origin
+# リモートリポジトリに存在しないブランチを、ローカルリポジトリから削除
+git remote prune origin
+```
+
+### リポジトリからファイルまたはディレクトリを完全に削除
+
+秘密情報などを記録／保存したファイル／ディレクトリを誤ってリポジトリにコミットした場合に、リポジトリから履歴ごとファイル／ディレクトリを完全に削除する方法を説明します。
+
+秘匿情報などをリモートリポジトリにプッシュしている場合は、強制的にプッシュする必要があるため、実際に実行する前に開発メンバーにその旨を通知してください。
+
+```sh
+# すべてのブランチからファイルまたはディレクトリを削除
+# ファイルの場合
+git filter-branch --force --index-filter 'git rm --cached --ignore-unmatch <file>' --prune-empty --tag-name-filter cat -- --all
+## ディレクトリの場合
+git filter-branch --force --index-filter 'git rm -r --cached --ignore-unmatch <directory>' --prune-empty --tag-name-filter cat -- --all
+
+# ローカルリポジトリから痕跡を削除
+rm -rf .git/refs/original/
+git reflog expire --expire=now --all
+git gc --aggressive --prune=now
+
+# リモートリポジトリに強制的にプッシュ
+git push -f origin <branch>
+```
