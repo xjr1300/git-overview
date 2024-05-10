@@ -112,13 +112,9 @@ Gitの主な特徴を次に示します。
   ローカルリポジトリは、開発者が作業を行うためのリポジトリです。
   リモートリポジトリからリポジトリをクローンすることで、ローカルリポジトリを作成できます。
 
-- Ricksoft社のブログから借用した図
+![リモートリポジトリとローカルリポジトリ](./images/remote-local-repositories.png)
 
-![リモートリポジトリとローカルリポジトリ](https://www.ricksoft.jp/blog/assets_c/2022/10/20221025_02-thumb-640xauto-7921.png)
-
-- CLOUD SMITH社のブログから借用した図
-
-![ブランチとコミット履歴](https://cloudsmith.co.jp/blog/.assets/thumbnail/GitFlow-640wri.png)
+![ブランチとコミットグラフ](./images/commit-graph.png)
 
 ## Gitのインストール
 
@@ -180,7 +176,7 @@ Gitでは変更内容（ファイル全体やファイルの一部）を次の3�
 
 - PENGIN社のブログから借用した図
 
-![Gitの3つのエリア](https://pengi-n.co.jp/blog/wp-content/uploads/2021/05/github1-1024x233.png)
+![Gitの3つのエリア](./images/git-three-areas.png)
 
 Gitコマンドを実行する場合、コマンドがこれら3つのエリアにどのような影響を与えるかを理解する必要があります。
 
