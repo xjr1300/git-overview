@@ -35,6 +35,7 @@
       - [ブランチの削除](#ブランチの削除)
       - [現在のブランチにマージされているブランチを表示](#現在のブランチにマージされているブランチを表示)
     - [ファイルのライフサイクルを操作するコマンド](#ファイルのライフサイクルを操作するコマンド)
+      - [変更の差分を確認する](#変更の差分を確認する)
       - [ファイルをステージングする](#ファイルをステージングする)
       - [ステージングしたファイルをワークツリーに戻す（ステージングの解除）](#ステージングしたファイルをワークツリーに戻すステージングの解除)
       - [ワークツリーでファイルに対する変更を取り消す](#ワークツリーでファイルに対する変更を取り消す)
@@ -838,6 +839,95 @@ git branch -D <branch>
 上記結果から、現在のブランチ（`develop`）以外のブランチは、現在のブランチにマージされているため、安全に削除できることがわかります。
 
 ### ファイルのライフサイクルを操作するコマンド
+
+#### 変更の差分を確認する
+
+最新のコミットと現在のファイルの差分を確認する場合、`diff`コマンドを使用します。
+ファイルを指定しない場合、すべてのファイルの差分を確認できます。
+
+```sh
+# 最新のコミットとわワークツリーの差分を確認
+git diff [<file>]
+# 最新のコミットとステージされた内容の差分を確認
+git diff --cached [<file>]
+```
+
+- 変更前
+
+```python
+# fibonacci/__init__.py
+def fibonacci(n: int) -> int:
+    """フィボナッチ数を返す。
+
+    Args:
+        n (int): フィボナッチ数の項
+
+    Returns:
+        int: 引数で指定された項のフィボナッチ数
+
+    Raises:
+        ValueError: フィボナッチ数の項が0未満の場合
+    """
+    pass
+```
+
+- 変更後
+
+```python
+def fibonacci(n: int) -> int:
+    """フィボナッチ数を返す。
+
+    Args:
+        n (int): フィボナッチ数の項
+
+    Returns:
+        int: 引数で指定された項のフィボナッチ数
+
+    Raises:
+        ValueError: フィボナッチ数の項が0未満の場合
+    """
+    if n == 0:
+        return 0
+    elif n == 1:
+        return 1
+    elif 2 <= n:
+        return fibonacci(n - 1) + fibonacci(n - 2)
+    else:
+        raise ValueError("fibonacci terms should be 0 or more numbers.")
+```
+
+- `diff`コマンドの結果
+
+```text
+diff --git a/fibonacci/__init__.py b/fibonacci/__init__.py
+index e69de29..82f9ab6 100644
+--- a/fibonacci/__init__.py
++++ b/fibonacci/__init__.py
+@@ -0,0 +1,22 @@
+-# fibonacci/__init__.py
+ def fibonacci(n: int) -> int:
+     """フィボナッチ数を返す。
+
+     Args:
+         n (int): フィボナッチ数の項
+
+     Returns:
+         int: 引数で指定された項のフィボナッチ数
+
+     Raises:
+         ValueError: フィボナッチ数の項が0未満の場合
+     """
+-    pass
++
++    if n == 0:
++        return 0
++    elif n == 1:
++        return 1
++    elif 2 <= n:
++        return fibonacci(n - 1) + fibonacci(n - 2)
++    else:
++        raise ValueError("fibonacci terms should be 0 or more numbers.")
+```
 
 #### ファイルをステージングする
 
