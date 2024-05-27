@@ -2100,6 +2100,7 @@ class TestFibonacci(unittest.TestCase):
 `fibonacci`関数の単体テストを実装した結果をコミットします。
 
 ```sh
+poetry run python -m unittest
 git add .
 git commit -m "fibonacci関数の単体テストを実装"
 ```
@@ -2194,7 +2195,39 @@ c7b1538 コマンドライン引数を解析するパーサーを実装
 33eb8ae 最初のコミット
 ```
 
-以降、`feature/cli`ブランチでCLIの開発を継続します。
+以降、`feature/cli`ブランチで`fibonacci_cli/__main__.py`ファイルでCLIを実装して、その結果をコミットします。
+
+```python
+ # fibonacci_cli/__main__.py
+ import argparse
+
++from fibonacci import fibonacci
+
+
+ def create_parser() -> argparse.ArgumentParser:
+     """コマンドライン引数を解析するパーサーを返す。
+
+     Returns:
+         argparse.ArgumentParser: コマンドラインを解析するパーサー
+     """
+     parser = argparse.ArgumentParser(
+         prog="fibonacci", description="Calculate a fibonacci number"
+     )
+     parser.add_argument("term", type=int, help="term of fibonacci")
+     return parser
+
++
++if __name__ == "__main__":
++    parser = create_parser()
++    args = parser.parse_args()
++    result = fibonacci(args.term)
++    print(f"fibonacci number: {result}")
+```
+
+```sh
+git add .
+git commit -m "CLIを実装"
+```
 
 ### コミットの取り消し
 
