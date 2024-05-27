@@ -2184,6 +2184,18 @@ git merge feature/fibo
 git branch -d feature/fibo
 ```
 
+- `rebase`前
+
+![rebase前](./images/before-rebase.png)
+
+- `rebase`後 (`feature/fibo`をリベースして、`feature/cli`の後に差分で得られたコミットを追加)
+
+![rebase後](./images/after-rebase.png)
+
+- `rebase`と`merge`の後 (`feature/cli`ブランチに`feature/fibo`ブランチをマージ)
+
+![rebaseとmergeの後](./images/after-rebase-and-merge.png)
+
 最終的なコミット履歴は次のとおりになります。
 
 ```sh
