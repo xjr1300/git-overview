@@ -1993,7 +1993,7 @@ git commit -m "最初のコミット"
 そのまま`main`ブランチで`.gitignore`ファイルを作成してコミットします。
 
 ```sh
-vim .gitignore
+code .gitignore
 git add .gitignore
 git commit -m ".gitignoreファイルを追加"
 ```
@@ -2005,8 +2005,7 @@ git commit -m ".gitignoreファイルを追加"
 ```sh
 # feature/fiboブランチを作成
 git switch -c feature/fibo
-mkdir fibonacci
-vim fibonacci/__init__.py
+code fibonacci/__init__.py
 ```
 
 ```python
@@ -2053,7 +2052,7 @@ git commit -m "fibonacci関数を実装"
 
 ```sh
 # `fibonacci`関数の単体テストを実装
-vim tests/test_fibonacci.py
+code tests/test_fibonacci.py
 # 単体テストを実行
 poetry run python -m unittest
 ```
@@ -2108,15 +2107,17 @@ git commit -m "fibonacci関数の単体テストを実装"
 ##### feature/cliブランチの作成と実装
 
 `main`ブランチに切り替えて、`feature/cli`ブランチを作成します。
+`fibonacci_cil/__main__.py`ファイルを作成して、コマンドライン引数を解析するパーサーを実装します。
 
 ```sh
 git switch main
 git switch -c feature/cli
+mkdir fibonacci_cli
+touch fibonacci_cli/__init__.py
+code fibonacci_cli/__main__.py
 ```
 
-`fibonacci_cil/__main__.py`ファイルを作成して、コマンドライン引数を解析するパーサーを実装します。
-
-```sh
+```python
 # fibonacci_cli/__main__.py
 import argparse
 
@@ -2151,7 +2152,7 @@ git commit -m "コマンドライン引数を解析するパーサーを実装"
 
 そこで、`rebase`コマンドを使用して、分岐したブランチをまとめます。
 
-`rebase`コマンドを使用した分岐したブランチをまとめることは、OSSにパッチを提供する場合や、プルリクエストを提案する場合によく実施されます。
+`rebase`コマンドを使用して分岐したブランチをまとめることは、OSSにパッチを提供する場合や、プルリクエストを提案する場合によく実施されます。
 
 #### `rebase`コマンドによるマージ
 
@@ -2159,7 +2160,7 @@ git commit -m "コマンドライン引数を解析するパーサーを実装"
 
 ![rebaseによるマージ](./images/rebase-by-merge.png)
 
-今回の場合、次のようにコミットグラフを直線化したいため、`feature/fibo`ブランチで`rebase`により`feature/cli`ブランチを取り込みます。
+今回の場合、図のようにコミットグラフを直線化したいため、`feature/fibo`ブランチで`rebase`により`feature/cli`ブランチを取り込みます。
 
 ```text
 rebaseでコミットグラフを次の通り直線状にしたい
@@ -2213,7 +2214,7 @@ git init
 その後、`README.md`ファイルを作成して、次のとおり入力して、コミットします。
 
 ```sh
-vim README.md
+code README.md
 git add .
 git commit -m "Chapter 1を追加"
 ```
@@ -2331,7 +2332,7 @@ a3e3ed8 Chapter 5を追加
 
 - `--soft`オプション：指定したコミット以降のコミットを取り消しますが、ワークツリーとステージに変更が残ります。
 - `--mixed`オプション：指定したコミット以降のコミットを取り消しますが、ワークツリーに変更が残ります。
-- `--hard`オプション：指定したコミット以降のコミットを取り消すが、ワークツリーとインデックスに変更が残りません。
+- `--hard`オプション：指定したコミット以降のコミットを取り消すが、ワークツリーとステージに変更が残りません。
 
 ##### `--mixed`オプションの動作確認
 
@@ -2519,7 +2520,7 @@ A --- B <- main
 まずは、`main`ブランチから`feature/a`ブランチを作成します。
 
 ```sh
-git checkout -b feature/a
+git switch -c feature/a
 ```
 
 ```text
