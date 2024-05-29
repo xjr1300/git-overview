@@ -1056,6 +1056,17 @@ git switch develop
 git merge feature/fix-readme
 ```
 
+なお、次のコマンドを実行してマージするときは`fast-forward`しないように設定します。
+`fast-forward`とは、マージするブランチのHEADの位置に、現在のブランチのHEADを移動することです。
+
+`fast-forward`は、`マージコミット`が作成されないため、マージの取り消し作業が煩雑になります。
+よって、次の2つのコマンドを実行して、マージするときは`fast-forward`しないように、またリモートブランチをプルする場合は`fast-forward`するように設定してください。
+
+```sh
+git config --global --add merge.ff false
+git config --global --add pull.ff only
+```
+
 #### リポジトリの変更を退避する
 
 リポジトリに`Modified`または`Staged`なファイルがあるときに、別のブランチに切り替えようとしたとき、Gitが拒否することがあります。
